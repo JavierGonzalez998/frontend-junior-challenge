@@ -22,6 +22,10 @@ const TodoForm = () => {
         if(text.trim() === ""){
             return
         }
+        if(e.key !== 'Enter'){
+            return
+          }
+
         const data = await addTasks({
             id: tasks.length + 2,
             label: Camelize(text),
@@ -51,7 +55,7 @@ const TodoForm = () => {
     }
   return (
     <form onSubmit={handleSubmit} className="formContainer">
-        <input type="text" id="inputText" className='inputText' placeholder='Enter new to do' value={text} onChange={(e) => setText(e.target.value)}/>
+        <input type="text" id="inputText" className='inputText' placeholder='Enter new to do' value={text} onChange={(e) => setText(e.target.value)} onKeyUp={handleSubmit} />
         <button className='BtnSend' type='submit' disabled={isEmpty}>ADD TO DO</button>
         <ToastContainer/>
     </form>
